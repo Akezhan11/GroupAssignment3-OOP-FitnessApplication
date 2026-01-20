@@ -5,7 +5,7 @@ public class FitnessClass {
     private int id;
     private String title;
     private int capacity;
-    private final int maxPlaces;
+    private int maxPlaces;
 
     public FitnessClass(int id, String title, int capacity, int maxPlaces) {
         this.id = id;
