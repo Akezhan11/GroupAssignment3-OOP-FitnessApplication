@@ -10,7 +10,8 @@ public class Member {
     private String surname;
     private String email;
     private String phone;
-    private LocalDate membershipEnd;
+    private MembershipType membershipType;
+    private LocalDate membershipEndDate;
     private static int idGEN;
 
     public Member(int id,String gender, String name, String surname, String email,String phone, LocalDate membershipEnd) {
@@ -23,8 +24,13 @@ public class Member {
         //setMembershipend(membershipEnd);
     }
 
-
-
+    public void setMembership(MembershipType type) {
+        this.membershipType = type;
+        this.membershipEndDate = LocalDate.now().plusDays(type.getDurationDays());
+    }
+    public boolean isExpired(){
+        return membershipEndDate == null || membershipEndDate.isBefore(LocalDate.now());
+    }
     public int getId() {
         return id;
     }
@@ -37,12 +43,7 @@ public class Member {
         return email;
     }
     public String getPhone() {return phone;}
-    public LocalDate getMembershipEnd() {
-        return membershipEnd;
-    }
-    public boolean isMembershipActive() {
-        return membershipEnd.isAfter(LocalDate.now());
-    }
+
 
 
 
