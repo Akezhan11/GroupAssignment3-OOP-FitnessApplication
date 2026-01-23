@@ -10,18 +10,20 @@ public class Member {
     private String surname;
     private String email;
     private String phone;
+
     private MembershipType membershipType;
     private LocalDate membershipEndDate;
-    private static int idGEN;
+
+    private static int idGEN=1;
 
     public Member(int id,String gender, String name, String surname, String email,String phone, LocalDate membershipEnd) {
-        this.id = idGEN++;
+        this.id = id;
         setGender(gender);
         setName(name);
         setSurname(surname);
         setEmail(email);
         setPhone(phone);
-        //setMembershipend(membershipEnd);
+        setMembershipEndDate(membershipEnd);
     }
 
     public void setMembership(MembershipType type) {
@@ -43,6 +45,7 @@ public class Member {
         return email;
     }
     public String getPhone() {return phone;}
+    public LocalDate getMembershipEndDate() { return membershipEndDate; }
 
 
 
@@ -65,10 +68,24 @@ public class Member {
     public void setPhone(String phone){
         this.phone=phone;
     }
+
+
     public void setGender(String gender) {
-        if(gender!="Male" || gender!="Female"){
+        if (gender == null) {
             throw new IllegalArgumentException("Write Male or Female");
         }
-        this.gender=gender;
+
+        if (!gender.equals("Male") && !gender.equals("Female")) {
+            throw new IllegalArgumentException("Write Male or Female");
+        }
+
+        this.gender = gender;
     }
+    public void setMembershipEndDate(LocalDate membershipEndDate) {
+        if (membershipEndDate == null) {
+            throw new IllegalArgumentException("Membership end date cannot be null");
+        }
+        this.membershipEndDate = membershipEndDate;
+    }
+
 }
