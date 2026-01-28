@@ -6,7 +6,7 @@ public interface FitnessClassRepository {
     void save(FitnessClass fitnessClass);
     FitnessClass findById(int id);
     FitnessClass findByType(String fitnessType);
-    FitnessClass findByTrainerName(String fitnessTrainerName);
-    FitnessClass findByCost(int fitnessCost);
+    List<FitnessClass> findByTrainerName(String fitnessTrainerName, String fitnessTrainerSurname);
+    List<FitnessClass> findByCost(int fitnessCost);
     List<FitnessClass> findAll();
 }

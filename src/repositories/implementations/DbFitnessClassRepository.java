@@ -1,4 +1,4 @@
 package repositories.implementations;
 
-public class InMemoryMemberRepository {
+public class DbFitnessClassRepository {
 }

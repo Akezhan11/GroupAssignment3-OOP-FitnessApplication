@@ -1,4 +1,7 @@
 package repositories;
+import entities.Member;
+import java.util.List;
 
-public interface MemberRepository {
+public interface MemberRepository{
+    void save(Member member);
 }
