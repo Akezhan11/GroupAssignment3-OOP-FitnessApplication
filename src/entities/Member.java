@@ -15,6 +15,7 @@ public class Member {
     private LocalDate membershipEndDate;
 
     private static int idGEN=1;
+    public Member(){}
 
     public Member(int id,String gender, String name, String surname, String email,String phone, LocalDate membershipEnd) {
         this.id = id;
@@ -24,6 +25,9 @@ public class Member {
         setEmail(email);
         setPhone(phone);
         setMembershipEndDate(membershipEnd);
+    }
+    public void setId(int id){
+        this.id = id;
     }
 
     public void setMembership(MembershipType type) {
