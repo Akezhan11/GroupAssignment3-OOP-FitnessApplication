@@ -14,11 +14,11 @@ public class Member {
     private MembershipType membershipType;
     private LocalDate membershipEndDate;
 
-    private static int idGEN=1;
+    private static int idGEN;
     public Member(){}
 
-    public Member(int id,String gender, String name, String surname, String email,String phone, LocalDate membershipEnd) {
-        this.id = id;
+    public Member(String gender, String name, String surname, String email,String phone, LocalDate membershipEnd) {
+        this.id = idGEN++;
         setGender(gender);
         setName(name);
         setSurname(surname);
