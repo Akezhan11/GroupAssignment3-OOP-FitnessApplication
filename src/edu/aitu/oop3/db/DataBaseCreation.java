@@ -53,7 +53,7 @@ public class DataBaseCreation {
 
     private static void membershipTable(){
         String sql = """
-                CREATE TABLE memberships (
+                CREATE TABLE IF NOT EXISTS memberships(
                     id SERIAL PRIMARY KEY,
                     member_id INT NOT NULL UNIQUE,
                     type VARCHAR(50) NOT NULL,
