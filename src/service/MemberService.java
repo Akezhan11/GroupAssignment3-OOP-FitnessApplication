@@ -5,6 +5,7 @@ import exception.InvalidPhoneNumberException;
 import exception.MemberNotFoundException;
 import repositories.MemberRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,9 +58,14 @@ public class MemberService {
         }
         return m;
     }
-    public List<Member> findAllMembers(){
-        return memberRepository.findAll();
+    public List<Member> getAllMembers() {
+        List<Member> members = memberRepository.findAll();
+        if (members == null) {
+            return new ArrayList<>(); // вместо null возвращаем пустой список
+        }
+        return members;
     }
+
 
     private boolean isValidPhone(String phone) {
         return phone != null && phone.matches("\\+?\\d{10,13}");

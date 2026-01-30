@@ -112,23 +112,28 @@ public class DbMemberRepository implements MemberRepository{
         }
     }
     @Override
-    public List<Member> findAll(){
-        String sql = """
-                SELECT * FROM members;
-        """;
+    public List<Member> findAll() {
+        String sql = "SELECT * FROM members;";
         List<Member> members = new ArrayList<>();
-        try(Connection con = DatabaseConnection.getConnection();PreparedStatement ps = con.prepareStatement(sql);ResultSet rs = ps.executeQuery()){
-            while(rs.next()){
+
+        try (Connection con = DatabaseConnection.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
                 String name = rs.getString("name");
                 String surname = rs.getString("surname");
                 String phoneNumber = rs.getString("phone");
                 String email = rs.getString("email");
                 String gender = rs.getString("gender");
-                members.add(new Member(name,surname,phoneNumber,email,gender));
+
+                members.add(new Member(name, surname, phoneNumber, email, gender));
             }
-            return null;
-        }catch(Exception e){
+            return members;
+
+        } catch (Exception e) {
             throw new RuntimeException("Error finding all members", e);
         }
     }
+
 }

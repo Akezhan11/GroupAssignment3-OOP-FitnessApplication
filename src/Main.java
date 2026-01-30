@@ -220,8 +220,12 @@ public class Main {
                             m.setGender(sc.nextLine());
                             memberService.addMember(m);
                         }case 2->{
-                            List<Member> members = memberService.findAllMembers();
-                            members.forEach(System.out::println);
+                            List<Member> members = memberService.getAllMembers();
+                            if (members.isEmpty()) {
+                                System.out.println("No members found.");
+                            } else {
+                                members.forEach(System.out::println);
+                            }
                         }case 3->{
                             System.out.print("Enter member id: ");
                             int id = sc.nextInt();

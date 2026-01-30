@@ -72,11 +72,6 @@ public class Member {
         return gender;
     }
     public void setGender(String gender){
-        boolean male = gender.toLowerCase().equals("male");
-        boolean female = gender.toLowerCase().equals("female");
-        if(!(male || female)){
-            throw new IllegalArgumentException("Invalid gender!");
-        }
         this.gender = gender;
     }
 
