@@ -1,8 +1,8 @@
 import edu.aitu.oop3.db.*;
-import edu.aitu.oop3.db.DbClassBookingRepository;
-import edu.aitu.oop3.db.DbFitnessClassRepository;
-import edu.aitu.oop3.db.DbMemberRepository;
-import edu.aitu.oop3.db.DbMembershipRepository;
+import repositories.implementations.DbClassBookingRepository;
+import repositories.implementations.DbFitnessClassRepository;
+import repositories.implementations.DbMemberRepository;
+import repositories.implementations.DbMembershipRepository;
 import entities.FitnessClass;
 import entities.Member;
 import service.BookingService;
