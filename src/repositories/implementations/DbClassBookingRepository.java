@@ -1,6 +1,7 @@
-package edu.aitu.oop3.db;
+package repositories.implementations;
 
 
+import edu.aitu.oop3.db.DatabaseConnection;
 import entities.ClassBooking;
 import entities.FitnessClass;
 import entities.Member;

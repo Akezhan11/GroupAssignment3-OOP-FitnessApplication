@@ -1,5 +1,6 @@
-package edu.aitu.oop3.db;
+package repositories.implementations;
 
+import edu.aitu.oop3.db.DatabaseConnection;
 import entities.MembershipType;
 import repositories.MembershipRepository;
 
