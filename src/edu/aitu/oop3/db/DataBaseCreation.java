@@ -8,6 +8,7 @@ public class DataBaseCreation {
         memberTable();
         fitnessTable();
         bookingTable();
+        membershipTable();
     }
     private static void memberTable(){
         String sql = """
@@ -15,6 +16,7 @@ public class DataBaseCreation {
                 id SERIAL PRIMARY KEY,
                 name varchar(255) NOT NULL,
                 surname varchar (255) NOT NULL,
+                phone varchar (255) NOT NULL,
                 email varchar(255) UNIQUE NOT NULL,
                 gender varchar(10) NOT NULL
                 );
@@ -37,14 +39,34 @@ public class DataBaseCreation {
                 """;
         execute(sql);
     }
-    private static void bookingTable(){
+    private static void bookingTable() {
         String sql = """
-                create table if not exists booking(
-                id SERIAL PRIMARY KEY,
-                member_id REFERENCES members(id),
-                class_id REFERENCES fitness(id),
-                booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CREATE TABLE IF NOT EXISTS bookings (
+            id SERIAL PRIMARY KEY,
+            member_id INT NOT NULL REFERENCES members(id),
+            class_id INT NOT NULL REFERENCES fitness(id),
+            booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        """;
+        execute(sql);
+    }
+
+    private static void membershipTable(){
+        String sql = """
+                CREATE TABLE memberships (
+                    id SERIAL PRIMARY KEY,
+                    member_id INT NOT NULL UNIQUE,
+                    type VARCHAR(50) NOT NULL,
+                    start_date DATE NOT NULL,
+                    end_date DATE NOT NULL,
+                    active BOOLEAN NOT NULL,
+                
+                    CONSTRAINT fk_member
+                        FOREIGN KEY (member_id)
+                        REFERENCES members(id)
+                        ON DELETE CASCADE
                 );
+                
                 """;
         execute(sql);
     }

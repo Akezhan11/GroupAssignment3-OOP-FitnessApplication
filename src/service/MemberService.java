@@ -1,48 +1,67 @@
 package service;
 
 import entities.Member;
+import exception.InvalidPhoneNumberException;
 import exception.MemberNotFoundException;
 import repositories.MemberRepository;
 
 import java.util.List;
 
+
 public class MemberService {
 
-    private final MemberRepository repository;
+    private final MemberRepository memberRepository;
 
-    public MemberService(MemberRepository repository) {
-        this.repository = repository;
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     public void addMember(Member member) {
-        repository.save(member);
-    }
-
-    public Member getById(int id) {
-        Member member = repository.findById(id);
-        if (member == null) {
-            throw new MemberNotFoundException("Member not found: id=" + id);
+        if (!isValidPhone(member.getPhoneNumber())) {
+            throw new InvalidPhoneNumberException(member.getPhoneNumber());
         }
-        return member;
+        memberRepository.save(member);
     }
+    public void updateMember(Member member) {
 
-    public Member getByEmail(String email) {
-        Member member = repository.findByEmail(email);
-        if (member == null) {
-            throw new MemberNotFoundException("Member not found: email=" + email);
+        if (member.getId() <= 0) {
+            throw new IllegalArgumentException("Invalid member id");
         }
-        return member;
-    }
 
-    public Member getByPhone(String phone) {
-        Member member = repository.findByPhone(phone);
-        if (member == null) {
-            throw new MemberNotFoundException("Member not found: phone=" + phone);
+        if (member.getEmail() == null || member.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email cannot be empty");
         }
-        return member;
+
+        memberRepository.update(member);
     }
 
-    public List<Member> getAllMembers() {
-        return repository.findAll();
+    public Member findMemberByid(int id) {
+        Member m = memberRepository.findById(id);
+        if (m == null) {
+            throw new MemberNotFoundException(id);
+        }
+        return m;
+    }
+    public Member findMemberByEmail(String email) {
+        Member m = memberRepository.findByEmail(email);
+        if (m == null) {
+            throw new MemberNotFoundException(email);
+        }
+        return m;
+    }
+
+    public Member findMemberByPhone(String phone){
+        Member m = memberRepository.findByPhone(phone);
+        if (m == null) {
+            throw new MemberNotFoundException(phone);
+        }
+        return m;
+    }
+    public List<Member> findAllMembers(){
+        return memberRepository.findAll();
+    }
+
+    private boolean isValidPhone(String phone) {
+        return phone != null && phone.matches("\\+?\\d{10,13}");
     }
 }

@@ -1,61 +1,60 @@
 package entities;
 
-public class MembershipType{
-    private String type;
-    private int cost;
-    private String description;
-    private int durationDays;
+import java.time.LocalDate;
 
-    public MembershipType(String type, int cost, String description, int durationDays) {
+public class MembershipType {
+
+    private int id;
+    private int memberId;
+    private String type;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private boolean active;
+    public MembershipType(){}
+    public MembershipType(int memberId, String type, LocalDate startDate, LocalDate endDate, boolean active){
+        setMemberId(memberId);
         setType(type);
-        setCost(cost);
-        setDescription(description);
-        setDurationDays(durationDays);
+        setStartDate(startDate);
+        setEndDate(endDate);
+        setActive(active);
+    }
+    public int getId() {
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getMemberId() {
+        return memberId;
+    }
+    public void setMemberId(int memberId){
+        this.memberId = memberId;
     }
     public String getType() {
         return type;
     }
-    public void setType(String type) {
-        if(type == null || type.isEmpty()) {
-            throw new IllegalArgumentException("type cannot be null or empty");
-        }
+    public void setType(String type){
         this.type = type;
     }
-
-
-    public int getCost(){
-        return cost;
+    public LocalDate getStartDate() {
+        return startDate;
     }
-    public void setCost(int cost){
-        if(cost < 0) {
-            throw new IllegalArgumentException("cost cannot be negative");
-        }
-        this.cost = cost;
+    public void setStartDate(LocalDate startDate){
+        this.startDate = startDate;
     }
-
-
-    public String getDescription(){
-        return description;
+    public LocalDate getEndDate() {
+        return endDate;
     }
-    public void setDescription(String description){
-        if(description == null || description.isEmpty()) {
-            throw new IllegalArgumentException("description cannot be null or empty");
-        }
-        this.description = description;
+    public void setEndDate(LocalDate endDate){
+        this.endDate = endDate;
     }
-    public int getDurationDays(){
-        return durationDays;
+    public boolean isActive() {
+        return active;
     }
-    public void setDurationDays(int durationDays){
-        if(durationDays < 0) {
-            throw new IllegalArgumentException("durationDays cannot be negative");
-        }
-        this.durationDays = durationDays;
+    public void setActive(boolean active){
+        this.active = active;
     }
-    @Override
-    public String toString() {
-        return "type: " + getType() + "\n"
-                + "Description: " + description + "\n"
-                + "cost of the membership" + cost;
+    public boolean isExpired() {
+        return endDate.isBefore(LocalDate.now());
     }
 }
